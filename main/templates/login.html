@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <h1>Login</h1>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>Username:</label><br>
+        <input type="text" name="username"><br>
+        <label>Password:</label><br>
+        <input type="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>

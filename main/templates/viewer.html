@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+    <!-- ✅ Load compatible Three.js and GLTFLoader from r128 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <h1 style="position: absolute; z-index: 1; margin: 10px; color: white;">3D Viewer</h1>
+    <a href="/" style="position: absolute; z-index: 1; margin: 10px; top: 40px; color: white;">Back to Home</a>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const loader = new THREE.GLTFLoader();
+        loader.load('/static/models/human.glb', function (gltf) {
+            scene.add(gltf.scene);
+        }, undefined, function (error) {
+            console.error(error);
+        });
+
+        const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+        scene.add(light);
+
+        camera.position.z = 3;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>
