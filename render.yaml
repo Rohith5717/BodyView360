@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bodyview360
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn bodyview360.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: your_django_secret_key
+      - key: DEBUG
+        value: False
