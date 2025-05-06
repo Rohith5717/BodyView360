@@ -11,4 +11,7 @@ urlpatterns = [
     path('viewer/', views.viewer),
     path('timeline/', views.health_timeline, name='timeline'),
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),  # Make sure this exists
+    path('accounts/', include('django.contrib.auth.urls')),  # Optional
+    # Add other app routes here
 ]
